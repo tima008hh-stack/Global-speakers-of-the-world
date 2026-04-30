@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TTD PROJECT: GLOBAL VOICE</title>
+    <style>
+        body { 
+            background: #050505; color: #00ff41; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; display: flex; flex-direction: column; height: 100vh; 
+        }
+        .panel { 
+            background: rgba(0, 255, 65, 0.1); 
+            padding: 10px; border-bottom: 2px solid #00ff41;
+            text-align: center; box-shadow: 0 0 15px #00ff41;
+        }
+        .main-frame { flex-grow: 1; position: relative; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        iframe {
+            width: 100%; height: 100%;
+            border: 1px solid #00ff41;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            display: none; /* Скрыто до выбора роли */
+        }
+
+        .btn-group { display: flex; gap: 20px; }
+        button { 
+            background: black; color: #00ff41; border: 2px solid #00ff41; 
+            padding: 20px; cursor: pointer; font-family: inherit; font-weight: bold;
+            box-shadow: 0 0 10px #00ff41;
+        }
+        button:hover { background: #00ff41; color: black; }
+
+        .info { font-size: 14px; margin-top: 5px; color: #ff00ff; }
+        h1 { margin: 5px 0; letter-spacing: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="panel">
+        <h1>[ TTD GLOBAL SPEAKER V1 ]</h1>
+        <div id="status" class="info">ОЖИДАНИЕ АВТОРИЗАЦИИ...</div>
+    </div>
+
+    <div class="main-frame" id="content">
+        <div class="btn-group" id="auth-buttons">
+            <button onclick="loginAdmin()">ВХОД: АДМИН</button>
+            <button onclick="loginUser()">ВХОД: ПОЛЬЗОВАТЕЛЬ</button>
+        </div>
+        
+        <iframe id="telemost-frame" src="" allow="camera; microphone; display-capture; fullscreen"></iframe>
+    </div>
+
+    <div class="panel" style="border-top: 2px solid #00ff41; border-bottom: none;">
+        <p>© 2026 THINK-TRY-DO COMPANY // BY TIMOFEY</p>
+    </div>
+
+    <script>
+        // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ИЗ ЯНДЕКС ТЕЛЕМОСТА
+        const TELEMOST_LINK = "https://meet.jit.si/VagueExcessesRemoveTherefore";
+
+        function loginAdmin() {
+            let pass = prompt("ВВЕДИТЕ ПАРОЛЬ АДМИНИСТРАТОРА:");
+            
+            if (pass === "123123") {
+                alert("ДОСТУП РАЗРЕШЕН. ПРИВЕТ, ТИМОФЕЙ.");
+                startProject("АДМИНИСТРАТОР (МОНИТОРИНГ)");
+            } else {
+                alert("ОШИБКА: ДОСТУП ЗАПРЕЩЕН!");
+            }
+        }
+
+        function loginUser() {
+            startProject("ПОЛЬЗОВАТЕЛЬ (КРИК)");
+        }
+
+        function startProject(role) {
+            document.getElementById('auth-buttons').style.display = 'none';
+            document.getElementById('status').innerText = "РЕЖИМ: " + role + " // СОЕДИНЕНИЕ УСТАНОВЛЕНО";
+            
+            const frame = document.getElementById('telemost-frame');
+            frame.src = TELEMOST_LINK;
+            frame.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
